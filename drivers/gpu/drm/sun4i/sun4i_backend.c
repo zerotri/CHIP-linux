@@ -135,7 +135,7 @@ int sun4i_backend_update_layer_coord(struct sun4i_backend *backend,
 	DRM_DEBUG_DRIVER("Layer size W: %u H: %u\n",
 			 state->crtc_w, state->crtc_h);
 	regmap_write(backend->regs, SUN4I_BACKEND_LAYSIZE_REG(layer),
-		     SUN4I_BACKEND_LAYSIZE(state->crtc_w,
+		     SUN4I_BACKEND_LAYSIZE(state->crtc_w - 1,
 					   state->crtc_h));
 
 	/* Set base coordinates */
@@ -203,6 +203,7 @@ int sun4i_backend_update_layer_buffer(struct sun4i_backend *backend,
 	paddr = gem->paddr + fb->offsets[0];
 	paddr += (state->src_x >> 16) * bpp;
 	paddr += (state->src_y >> 16) * fb->pitches[0];
+	paddr += bpp;
 
 	DRM_DEBUG_DRIVER("Setting buffer address to 0x%x\n", paddr);
 
