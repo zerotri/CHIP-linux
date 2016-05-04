@@ -58,9 +58,6 @@ static unsigned long __bestmult(struct clk_hw *hw, unsigned long rate,
 	unsigned long parent_rate, current_rate, best_rate = ~0;
 	unsigned int i, bestmult = 0;
 
-	if (!(clk_hw_get_flags(hw) & CLK_SET_RATE_PARENT))
-		return rate / *best_parent_rate;
-
 	for (i = 1; i < ((1 << width) - 1); i++) {
 		if (rate == orig_parent_rate * i) {
 			/*
