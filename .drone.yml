@@ -1,0 +1,13 @@
+workspace:
+  base: /drone
+  path: /workdir
+
+pipeline:
+  build:
+    image: multiarch/crossbuild
+    environment:
+      - CROSS_COMPILE=arm-linux-gnueabihf-
+    commands:
+      - ls -al
+    when:
+      event: push
