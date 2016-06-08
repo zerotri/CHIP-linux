@@ -6,8 +6,11 @@ pipeline:
   build:
     image: multiarch/crossbuild
     environment:
+      - ARCH=arm
       - CROSS_COMPILE=arm-linux-gnueabihf-
     commands:
-      - ls -al
+      - make multi_v7_defconfig
+      - make -j8
+      - ls -al arch/arm/boot/
     when:
       event: push
